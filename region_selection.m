@@ -14,7 +14,7 @@ iter = 1;
 while(strcmp(get(gcf,'CurrentKey'),'return')~= 1)
     
     % get rectangle from user
-    rect = getrect(plt)
+    rect = getrect(plt);
 
     % making selected rectangle a square
     % if(rect(3)>=rect(4))
@@ -44,7 +44,6 @@ while(strcmp(get(gcf,'CurrentKey'),'return')~= 1)
         % display selected rectangle
         rectangle('Position',rect,'EdgeColor','r')
         
-        rect
         
         %saving rectangle in array
         regions(:,:,iter) = img(rect(2):rect(2)+rect(4)-1,rect(1):rect(1)+rect(3)-1);
