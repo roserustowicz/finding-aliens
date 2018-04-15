@@ -3,7 +3,7 @@ size_of_region = 32;
 regions = zeros(size_of_region,size_of_region,1);
 
 % loading image
-img = im2double(imread('rand_2015.png'));
+img = im2double(imread('rand_2014.png'));
 plt = figure();
 imshow(img);
 title(sprintf('press "return" to quit,\n press/click anything else to continue,\n if region selected is greater than %dX%d it is not stored.',size_of_region,size_of_region))
@@ -52,4 +52,4 @@ while(strcmp(get(gcf,'CurrentKey'),'return')~= 1)
     waitforbuttonpress
 end
 % saving regions 3D matrix
-save('rand_2015_clips_class0.mat','regions')
+save('rand_2014_2_clips_class0.mat','regions')
