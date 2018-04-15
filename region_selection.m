@@ -3,7 +3,7 @@ size_of_region = 32;
 regions = zeros(size_of_region,size_of_region,1);
 
 % loading image
-img = im2double(imread('data/iran_1_30.png'));
+img = im2double(imread('data/ks_2_30.png'));
 plt = figure();
 imshow(img);
 title(sprintf('press "return" to quit,\n press/click anything else to continue,\n if region selected is greater than %dX%d it is not stored.',size_of_region,size_of_region))
@@ -13,7 +13,7 @@ iter = 1;
 while(strcmp(get(gcf,'CurrentKey'),'return')~= 1)
     
     % get rectangle from user
-    rect = getrect(plt)
+    rect = getrect(plt);
 
     % making selected rectangle a square
     % if(rect(3)>=rect(4))
@@ -52,4 +52,4 @@ while(strcmp(get(gcf,'CurrentKey'),'return')~= 1)
     waitforbuttonpress
 end
 % saving regions 3D matrix
-save('iran_30_01.mat','regions')
+save('ks_2_30_01.mat','regions')
