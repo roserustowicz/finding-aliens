@@ -1,14 +1,13 @@
 % region selection from image
-size_of_region = 64;
+size_of_region = 32;
 regions = zeros(size_of_region,size_of_region,1);
 
 % loading image
-img = im2double(imread('landsat_kansas_2016_2017.tif'));
+img = im2double(imread('data/iran_1_30.png'));
 plt = figure();
 imshow(img);
 title(sprintf('press "return" to quit,\n press/click anything else to continue,\n if region selected is greater than %dX%d it is not stored.',size_of_region,size_of_region))
 
-key = get(gcf,'CurrentKey');
 % run loop until user input
 iter = 1;
 while(strcmp(get(gcf,'CurrentKey'),'return')~= 1)
@@ -37,20 +36,20 @@ while(strcmp(get(gcf,'CurrentKey'),'return')~= 1)
         end
         
         % ensuring region size is uniform
-        rect(3) = size_of_region*sign(rect(3));
-        rect(4) = size_of_region*sign(rect(4));
+        rect(3) = size_of_region;
+        rect(4) = size_of_region;
 
         % display selected rectangle
         rectangle('Position',rect,'EdgeColor','r')
         
-        rect
-        
         %saving rectangle in array
-        regions(:,:,iter) = img(rect(2):rect(2)+rect(4)-1,rect(1):rect(1)+rect(3)-1);
-        iter = iter+1;
+        if( rect(2)>0 && rect(1)>0 && rect(2)+rect(4)<=size(img,1) && rect(1)+rect(3)<=size(img,2))
+            regions(:,:,iter) = img(rect(2):rect(2)+rect(4)-1,rect(1):rect(1)+rect(3)-1);
+            iter = iter+1;
+        end
     end
     
     waitforbuttonpress
 end
 % saving regions 3D matrix
-save('ROI','regions')
+save('iran_30_01.mat','regions')
