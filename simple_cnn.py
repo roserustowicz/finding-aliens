@@ -8,11 +8,37 @@ import numpy as np
 import cv2
 import scipy.ndimage as ndimage
 import keras
+import scipy.io
 from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 from keras import backend as K
+import glob, os
+
+
+def read_in_data():
+    path = './data/clips/class0/*.mat'   
+    files=glob.glob(path)   
+    class0 = []
+    for file in files:
+        class0.append(scipy.io.loadmat(file)['regions'])
+        
+    path = './data/clips/class1/*.mat'
+    files=glob.glob(path)
+    class1 = []
+    for file in files:
+        class1.append(scipy.io.loadmat(file)['regions'])
+ 
+    class0 = np.concatenate(class0, 2)
+    class1 = np.concatenate(class1, 2)
+
+
+    print(class0.shape) #631
+    print(class1.shape) #1002
+
+
+read_in_data()
 
 batch_size = 128
 num_classes = 10
